@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="google" content="notranslate">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<meta name="theme-color" content="#000000">
+<title>Checkout · Najd · Riyadh</title>
+<meta name="description" content="Complete your Najd order. Secure checkout via Stripe.">
+<meta name="robots" content="noindex">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=El+Messiri:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --gold: linear-gradient(270deg,#fbe291 55%,#c8982b 100%); }
+  html,body{background:#000;color:#fff;font-family:'Inter','El Messiri',sans-serif;}
+  .serif{font-family:'Cormorant Garamond','Reem Kufi',serif;}
+  html[lang="ar"] body{font-family:'El Messiri',sans-serif;font-weight:500;}
+  html[lang="ar"] .serif{font-family:'Reem Kufi',sans-serif;font-weight:500;font-style:normal;}
+  html[lang="ar"] [class*="tracking-"]{letter-spacing:0 !important;}
+  html[lang="ar"] .uppercase{text-transform:none;}
+  html[lang="ar"] .italic{font-style:normal;}
+  html[lang="ar"] .arrow{display:inline-block;transform:scaleX(-1);}
+  .gold-text{background:var(--gold);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .btn-gold{background:var(--gold);color:#000;}
+  #langToggle{font-family:'El Messiri','Inter',sans-serif;}
+  .panel{border:1px solid rgba(217,188,125,.18);background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(0,0,0,.3));}
+  .field{display:block;}
+  .field label{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#d9bc7d;margin-bottom:.4rem;}
+  .field label .req{color:#e8a96e;margin-left:.15rem;}
+  .field input, .field select, .field textarea{
+    width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.12);
+    padding:.7rem .85rem;color:#fff;font-size:14px;outline:none;
+    transition:border-color .25s, background .25s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    border-color:#c8982b;background:rgba(200,152,43,.05);
+  }
+  .field input::placeholder, .field textarea::placeholder{color:rgba(255,255,255,.3);}
+  .field select{color:#fff;}
+  .field select option{background:#0a0a0a;color:#fff;}
+  .field input[type="date"], .field input[type="time"]{color-scheme:dark;}
+
+  .pay-row{display:flex;align-items:center;gap:.75rem;padding:.75rem;border:1px solid rgba(217,188,125,.18);background:rgba(255,255,255,.025);cursor:pointer;transition:border-color .25s,background .25s;}
+  .pay-row:hover{border-color:rgba(217,188,125,.45);}
+  .pay-row.sel{border-color:#c8982b;background:rgba(200,152,43,.08);}
+  .badge-img{height:14px;}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.22,.61,.36,1),transform .8s cubic-bezier(.22,.61,.36,1);}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* cart drawer */
+  #cartDrawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:#0a0a0a;border-left:1px solid rgba(217,188,125,.2);z-index:80;transform:translateX(100%);transition:transform .4s cubic-bezier(.22,.61,.36,1),visibility 0s linear .4s;display:flex;flex-direction:column;visibility:hidden;}
+  html[lang="ar"] #cartDrawer{right:auto;left:0;border-left:none;border-right:1px solid rgba(217,188,125,.2);transform:translateX(-100%);}
+  #cartDrawer.open{transform:none;visibility:visible;transition:transform .4s cubic-bezier(.22,.61,.36,1),visibility 0s;}
+  #cartBackdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:75;opacity:0;pointer-events:none;transition:opacity .35s;}
+  #cartBackdrop.open{opacity:1;pointer-events:auto;}
+
+  /* success modal */
+  #okModal{position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;padding:1rem;}
+  #okModal.open{display:flex;}
+</style>
+</head>
+<body class="overflow-x-hidden">
+
+<header class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 md:px-10 py-5 bg-black/70 backdrop-blur-md border-b border-white/5">
+  <a href="cart.html" class="flex items-center gap-2 text-xs tracking-[0.2em] uppercase">
+    <span class="arrow">←</span> Back to Cart
+  </a>
+  <a href="index.html" translate="no" class="notranslate absolute left-1/2 -translate-x-1/2 serif text-2xl md:text-3xl italic tracking-wide gold-text">Najd</a>
+  <div class="flex items-center gap-3">
+    <button id="langToggle" translate="no" class="notranslate px-3 py-2 text-xs tracking-[0.2em] uppercase border border-white/20 rounded-full hover:border-white/60 transition">العربية</button>
+    <button id="cartIcon" aria-label="Cart" class="relative w-10 h-10 flex items-center justify-center border border-white/20 rounded-full hover:border-white/60 transition">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h2l2.4 12.3a2 2 0 002 1.7h8.5a2 2 0 002-1.6L21 8H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+      <span id="cartBadge" class="absolute -top-1 -right-1 w-5 h-5 rounded-full text-[10px] font-semibold flex items-center justify-center btn-gold hidden">0</span>
+    </button>
+  </div>
+</header>
+
+<section class="pt-32 pb-10 px-6 md:px-16 text-center border-b border-white/5">
+  <p class="text-xs tracking-[0.3em] uppercase gold-text mb-4">Billing &amp; Delivery</p>
+  <h1 class="serif italic text-5xl md:text-7xl leading-none">CHECKOUT</h1>
+</section>
+
+<main class="px-6 md:px-16 py-14 max-w-6xl mx-auto">
+  <div id="emptyNotice" class="text-center py-24 hidden">
+    <p class="serif italic text-3xl gold-text mb-4">Your cart is empty</p>
+    <p class="text-sm text-white/60 mb-8">Add a few dishes before checking out.</p>
+    <a href="menu.html" class="inline-block btn-gold px-6 py-3 rounded-full text-xs tracking-[0.25em] uppercase">View Menu <span class="arrow">↗</span></a>
+  </div>
+
+  <form id="checkoutForm" class="grid lg:grid-cols-[1fr_400px] gap-10 hidden" novalidate>
+    <div class="space-y-6">
+      <section class="panel p-6 md:p-8">
+        <h2 class="text-[10px] tracking-[0.3em] uppercase text-white/60 border-b border-white/10 pb-4 mb-6">Billing Details</h2>
+        <div class="grid md:grid-cols-2 gap-5">
+          <div class="field">
+            <label>First Name <span class="req">*</span></label>
+            <input required name="firstName" placeholder="First Name" data-ph-ar="الاسم الأول">
+          </div>
+          <div class="field">
+            <label>Last Name <span class="req">*</span></label>
+            <input required name="lastName" placeholder="Last Name" data-ph-ar="اسم العائلة">
+          </div>
+          <div class="field md:col-span-2">
+            <label>Country / Region <span class="req">*</span></label>
+            <input readonly value="Saudi Arabia" name="country" class="!bg-white/[.02] !text-white/70 cursor-default">
+          </div>
+          <div class="field md:col-span-2">
+            <label>Street address <span class="req">*</span></label>
+            <input required name="address1" placeholder="House number and street name" data-ph-ar="رقم المنزل واسم الشارع" class="mb-3">
+            <input name="address2" placeholder="Apartment, suite, unit, etc. (optional)" data-ph-ar="شقة، وحدة، مبنى... (اختياري)">
+          </div>
+          <div class="field">
+            <label>Town / City <span class="req">*</span></label>
+            <input required name="city" placeholder="Riyadh" data-ph-ar="الرياض" value="Riyadh">
+          </div>
+          <div class="field">
+            <label>District (optional)</label>
+            <input name="district" placeholder="Al Malqa" data-ph-ar="الملقا">
+          </div>
+          <div class="field">
+            <label>Phone <span class="req">*</span></label>
+            <input required type="tel" name="phone" placeholder="+966 5X XXX XXXX" data-ph-ar="+966 5X XXX XXXX">
+          </div>
+          <div class="field">
+            <label>Email Address <span class="req">*</span></label>
+            <input required type="email" name="email" placeholder="you@email.com" data-ph-ar="you@email.com">
+          </div>
+        </div>
+      </section>
+
+      <section class="panel p-6 md:p-8">
+        <h2 class="text-[10px] tracking-[0.3em] uppercase text-white/60 border-b border-white/10 pb-4 mb-6">Order Notes (optional)</h2>
+        <div class="field">
+          <textarea name="notes" rows="4" placeholder="Notes about your order, e.g. special notes for delivery." data-ph-ar="ملاحظات حول طلبك، مثل تعليمات التوصيل."></textarea>
+        </div>
+      </section>
+    </div>
+
+    <aside class="space-y-5 lg:sticky lg:top-28 h-fit">
+      <section class="panel p-6">
+        <h2 class="text-[10px] tracking-[0.3em] uppercase text-white/60 border-b border-white/10 pb-4 mb-4">Your Order</h2>
+        <div class="grid grid-cols-[1fr_auto] gap-3 pb-3 border-b border-white/10 text-[10px] tracking-[0.3em] uppercase text-white/50">
+          <span>Product</span><span>Subtotal</span>
+        </div>
+        <ul id="orderItems" class="divide-y divide-white/5 mb-3"></ul>
+        <div class="space-y-2 text-sm pt-3 border-t border-white/10">
+          <div class="flex justify-between text-white/70"><span>Subtotal</span><span id="oSub">0 SAR</span></div>
+          <div class="flex justify-between text-white/70"><span>VAT (15%)</span><span id="oVat">0 SAR</span></div>
+          <div class="flex justify-between text-white/70"><span>Delivery Fee</span><span id="oDel">25 SAR</span></div>
+        </div>
+        <div class="flex justify-between items-baseline pt-4 mt-3 border-t border-white/10">
+          <span class="text-xs tracking-[0.3em] uppercase">Order Total</span>
+          <span id="oTotal" class="text-2xl gold-text">0 SAR</span>
+        </div>
+      </section>
+
+      <details class="panel p-5">
+        <summary class="cursor-pointer flex justify-between items-center text-xs tracking-[0.25em] uppercase text-white/70 hover:text-white">
+          <span><span class="text-white/50">Have a coupon?</span> <span class="gold-text ml-1">Click here to enter your coupon code</span></span>
+          <span class="text-white/40">▾</span>
+        </summary>
+        <div class="mt-4 flex gap-2">
+          <input id="coCoupon" type="text" placeholder="Coupon code" data-ph-ar="رمز الكوبون" class="flex-1 bg-transparent border border-white/15 px-3 py-2 text-xs outline-none focus:border-[#c8982b] placeholder:text-white/30">
+          <button type="button" id="coCouponBtn" class="px-4 py-2 text-[10px] tracking-[0.25em] uppercase border border-[#c8982b]/50 text-[#d9bc7d] hover:bg-[#d9bc7d] hover:text-black transition">Apply</button>
+        </div>
+        <p id="coCouponMsg" class="text-[11px] mt-2 text-white/50"></p>
+      </details>
+
+      <section class="panel p-6">
+        <h2 class="text-[10px] tracking-[0.3em] uppercase text-white/60 border-b border-white/10 pb-4 mb-4">Payment Method</h2>
+        <label class="pay-row sel" data-pay="stripe">
+          <input type="radio" name="payment" value="stripe" checked class="accent-[#c8982b]">
+          <div class="flex-1">
+            <p class="text-sm">Stripe — Cards &amp; Wallets</p>
+            <p class="text-[11px] text-white/50 mt-0.5">Secure checkout via Stripe.</p>
+          </div>
+        </label>
+
+        <div class="mt-5 bg-[#0d0d0d] border border-white/10 p-4 space-y-4">
+          <p class="text-xs text-white/60">How would you like to pay?</p>
+
+          <button type="button" id="applePayBtn" class="w-full bg-black border border-white/20 text-white py-3 rounded-md text-sm flex items-center justify-center gap-2 hover:bg-white/5 transition">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.7 12.5c0-2.4 2-3.6 2-3.6-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 6.9 1.2 9.2.8 1.1 1.7 2.3 2.9 2.3 1.2 0 1.6-.7 3-.7 1.4 0 1.7.7 2.9.7 1.2 0 2-1.1 2.7-2.2.6-.9 1-1.8 1.3-2.7-2.6-1-3.3-3.5-3.3-3.5zm-2.4-6.4c.6-.7 1-1.7 1-2.7-.8 0-1.8.5-2.5 1.2-.6.6-1.1 1.6-1 2.6 1 .1 1.9-.4 2.5-1.1z"/></svg>
+            <span>Pay with Apple Pay</span>
+          </button>
+
+          <div class="flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase text-white/40">
+            <span class="flex-1 h-px bg-white/10"></span><span>Or Pay With</span><span class="flex-1 h-px bg-white/10"></span>
+          </div>
+
+          <button type="button" class="w-full bg-white/[.04] border border-white/10 px-3 py-3 rounded-md flex items-center justify-between hover:border-[#c8982b]/40 transition">
+            <span class="flex items-center gap-3">
+              <span class="inline-flex items-center justify-center bg-white text-[#1d4886] font-bold text-[10px] tracking-tight px-2 py-1 rounded">mada</span>
+              <span class="text-xs text-[#d9bc7d]">Mada</span>
+            </span>
+            <span id="oTotalInline" class="text-xs text-white/70">0 SAR</span>
+          </button>
+
+          <div class="flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase text-white/40">
+            <span class="flex-1 h-px bg-white/10"></span><span>Or Insert Card Details</span><span class="flex-1 h-px bg-white/10"></span>
+          </div>
+
+          <div class="space-y-3">
+            <input type="text" name="cardName" placeholder="Name on card" data-ph-ar="الاسم على البطاقة" class="w-full bg-white/[.03] border border-white/10 px-3 py-2.5 text-sm outline-none focus:border-[#c8982b] placeholder:text-white/30">
+            <div class="flex items-center gap-2">
+              <input type="text" inputmode="numeric" maxlength="19" id="cardNum" name="cardNum" placeholder="Card number" data-ph-ar="رقم البطاقة" class="flex-1 bg-white/[.03] border border-white/10 px-3 py-2.5 text-sm outline-none focus:border-[#c8982b] placeholder:text-white/30 font-mono">
+              <div class="flex gap-1">
+                <span class="inline-flex items-center justify-center bg-white px-1.5 py-1 rounded text-[#1a1f71] font-bold italic text-[10px]">VISA</span>
+                <span class="inline-flex items-center justify-center bg-white px-1.5 py-1 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#eb001b] -mr-1"></span><span class="w-2.5 h-2.5 rounded-full bg-[#f79e1b] opacity-90"></span>
+                </span>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <input type="text" inputmode="numeric" maxlength="5" id="cardExp" name="cardExp" placeholder="MM / YY" class="bg-white/[.03] border border-white/10 px-3 py-2.5 text-sm outline-none focus:border-[#c8982b] placeholder:text-white/30 font-mono">
+              <input type="text" inputmode="numeric" maxlength="4" name="cardCvv" placeholder="CVV" class="bg-white/[.03] border border-white/10 px-3 py-2.5 text-sm outline-none focus:border-[#c8982b] placeholder:text-white/30 font-mono">
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" id="payBtn" class="mt-5 w-full btn-gold px-5 py-4 rounded-full text-xs tracking-[0.3em] uppercase flex items-center justify-center gap-2">Place Order <span class="arrow">↗</span></button>
+        <p class="text-[10px] text-white/40 mt-3 text-center">By placing your order you agree to our terms.</p>
+      </section>
+    </aside>
+  </form>
+</main>
+
+<footer class="px-6 md:px-16 py-8 border-t border-white/10 text-xs text-white/40 flex flex-col md:flex-row justify-between items-center gap-4 mt-10">
+  <p>© 2026 Najd. All Rights Reserved.</p>
+  <a href="index.html" translate="no" class="notranslate serif italic text-base gold-text">Najd</a>
+  <p>Riyadh · KSA</p>
+</footer>
+
+<div id="cartBackdrop"></div>
+<aside id="cartDrawer" aria-label="Cart drawer">
+  <div class="flex justify-between items-center px-5 py-4 border-b border-white/10">
+    <p class="text-[10px] tracking-[0.3em] uppercase gold-text">Your Cart</p>
+    <button id="cartDrawerClose" aria-label="Close" class="text-white/60 hover:text-white text-xl leading-none">×</button>
+  </div>
+  <div id="drawerItems" class="flex-1 overflow-y-auto px-5 py-4"></div>
+  <div class="border-t border-white/10 p-5">
+    <div class="flex justify-between items-baseline mb-4">
+      <span class="text-xs tracking-[0.25em] uppercase text-white/60">Subtotal</span>
+      <span id="drawerSubtotal" class="text-xl gold-text">0 SAR</span>
+    </div>
+    <div class="grid grid-cols-2 gap-3">
+      <a href="cart.html" class="text-center px-4 py-3 border border-white/20 rounded-full text-[10px] tracking-[0.25em] uppercase hover:border-white/60 transition">View Cart</a>
+      <a href="checkout.html" class="text-center btn-gold px-4 py-3 rounded-full text-[10px] tracking-[0.25em] uppercase">Checkout <span class="arrow">↗</span></a>
+    </div>
+  </div>
+</aside>
+
+<div id="okModal">
+  <div class="panel p-8 max-w-md text-center">
+    <p class="text-[10px] tracking-[0.3em] uppercase gold-text mb-3">Order received</p>
+    <h3 class="serif italic text-3xl mb-3">Thank you.</h3>
+    <p class="text-sm text-white/70 mb-6" id="okMsg">We'll call to confirm shortly.</p>
+    <a href="index.html" class="inline-block btn-gold px-6 py-3 rounded-full text-xs tracking-[0.3em] uppercase">Return Home</a>
+  </div>
+</div>
+
+<script src="cart.js"></script>
+<script>
+  const DELIVERY = 25;
+  function renderOrder(){
+    const items = NajdCart.get();
+    const empty = document.getElementById('emptyNotice');
+    const form  = document.getElementById('checkoutForm');
+    if (!items.length){ empty.classList.remove('hidden'); form.classList.add('hidden'); return; }
+    empty.classList.add('hidden'); form.classList.remove('hidden');
+    document.getElementById('orderItems').innerHTML = items.map(it => `
+      <li class="flex justify-between gap-2 py-2.5 text-sm">
+        <span class="text-white/85" data-tr-name="${it.id}">${it.name} <span class="text-white/40">× ${it.qty}</span></span>
+        <span class="gold-text whitespace-nowrap">${(it.price*it.qty).toFixed(0)} SAR</span>
+      </li>`).join('');
+    const sub = NajdCart.subtotal();
+    const vat = sub * 0.15;
+    const total = sub + vat + DELIVERY;
+    document.getElementById('oSub').textContent = `${sub.toFixed(0)} SAR`;
+    document.getElementById('oVat').textContent = `${vat.toFixed(0)} SAR`;
+    document.getElementById('oDel').textContent = `${DELIVERY} SAR`;
+    document.getElementById('oTotal').textContent = `${total.toFixed(0)} SAR`;
+    document.getElementById('oTotalInline').textContent = `${total.toFixed(0)} SAR`;
+    document.getElementById('payBtn').innerHTML = `<span>Place Order</span> — ${total.toFixed(0)} SAR <span class="arrow">↗</span>`;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    NajdCart.initHeader();
+    renderOrder();
+    NajdCart.applyLangToDynamic();
+
+    // card formatting
+    const cn = document.getElementById('cardNum');
+    cn.addEventListener('input', () => {
+      cn.value = cn.value.replace(/\D/g,'').slice(0,16).replace(/(\d{4})(?=\d)/g,'$1 ').trim();
+    });
+    const ex = document.getElementById('cardExp');
+    ex.addEventListener('input', () => {
+      let v = ex.value.replace(/\D/g,'').slice(0,4);
+      if (v.length >= 3) v = v.slice(0,2) + ' / ' + v.slice(2);
+      ex.value = v;
+    });
+
+    // payment row select
+    document.querySelectorAll('.pay-row').forEach(r => r.addEventListener('click', () => {
+      document.querySelectorAll('.pay-row').forEach(x => x.classList.remove('sel'));
+      r.classList.add('sel');
+    }));
+
+    document.getElementById('coCouponBtn').addEventListener('click', () => {
+      const c = document.getElementById('coCoupon').value.trim().toUpperCase();
+      const m = document.getElementById('coCouponMsg');
+      m.textContent = c ? `Code "${c}" not valid for this order.` : 'Enter a code first.';
+      m.style.color = '#d97070';
+    });
+
+    document.getElementById('applePayBtn').addEventListener('click', () => {
+      submitOrder('Apple Pay');
+    });
+
+    document.getElementById('checkoutForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const f = e.target;
+      if (!f.checkValidity()){ f.reportValidity(); return; }
+      submitOrder('Card');
+    });
+  });
+
+  function submitOrder(method){
+    const btn = document.getElementById('payBtn');
+    const orig = btn.innerHTML;
+    btn.disabled = true; btn.innerHTML = 'Processing…';
+    setTimeout(() => {
+      NajdCart.clear();
+      const m = document.getElementById('okMsg');
+      m.textContent = `Paid via ${method}. We'll call to confirm shortly.`;
+      document.getElementById('okModal').classList.add('open');
+      btn.disabled = false; btn.innerHTML = orig;
+    }, 900);
+  }
+</script>
+</body>
+</html>

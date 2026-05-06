@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#fbe291"/>
+      <stop offset="55%" stop-color="#fbe291"/>
+      <stop offset="100%" stop-color="#c8982b"/>
+    </linearGradient>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#1a1208"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="40" y="40" width="1120" height="550" fill="none" stroke="url(#g)" stroke-width="1" opacity="0.35"/>
+  <text x="600" y="270" font-family="Cormorant Garamond, Garamond, Georgia, serif" font-size="32" font-weight="300" letter-spacing="14" fill="#ffffff" opacity="0.7" text-anchor="middle">RIYADH · KSA</text>
+  <text x="600" y="400" font-family="Cormorant Garamond, Garamond, Georgia, serif" font-size="200" font-style="italic" font-weight="500" fill="url(#g)" text-anchor="middle">Najd</text>
+  <text x="600" y="475" font-family="Cormorant Garamond, Garamond, Georgia, serif" font-size="26" font-weight="300" letter-spacing="8" fill="#ffffff" opacity="0.6" text-anchor="middle">MODERN SAUDI HERITAGE DINING</text>
+  <line x1="500" y1="510" x2="700" y2="510" stroke="url(#g)" stroke-width="0.8" opacity="0.5"/>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#fbe291"/>
+      <stop offset="55%" stop-color="#fbe291"/>
+      <stop offset="100%" stop-color="#c8982b"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="10" fill="#000"/>
+  <rect x="2" y="2" width="60" height="60" rx="9" fill="none" stroke="url(#g)" stroke-width="0.6" opacity="0.5"/>
+  <text x="32" y="46" font-family="Cormorant Garamond, Garamond, Georgia, serif" font-size="48" font-style="italic" font-weight="500" fill="url(#g)" text-anchor="middle">N</text>
+</svg>
