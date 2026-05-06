@@ -82,7 +82,7 @@
   .reveal-delay-3{transition-delay:.36s;}
 
   /* word reveal for headings */
-  .word-reveal .w{display:inline-block;overflow:hidden;vertical-align:bottom;}
+  .word-reveal .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:0.2em;margin-bottom:-0.2em;}
   .word-reveal .w > span{display:inline-block;transform:translateY(110%);transition:transform 1s cubic-bezier(.22,.61,.36,1);}
   .word-reveal.in .w > span{transform:none;}
   .word-reveal .w:nth-child(2) > span{transition-delay:.08s;}
@@ -511,10 +511,11 @@
           <p class="text-[0.65rem] tracking-[0.3em] uppercase text-white/40 mb-1.5">01 · Mezze</p>
           <h4 class="serif italic text-xl mb-2"><span>Sambousek Diriyah</span> <span class="text-white/45 text-base not-italic">· 6 pcs</span></h4>
           <p class="text-[12.5px] text-white/55 leading-relaxed mb-3">Hand-folded pastry. Spiced lamb. Pomegranate molasses. Smoked yogurt.</p>
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between mb-2.5">
             <span class="dish-spec">Heritage</span>
             <span class="text-xs tracking-[0.2em] gold-text">62 SAR</span>
           </div>
+          <button onclick="NajdCart.add({id:'sambousek',name:'Sambousek Diriyah',price:62,img:'images/sambousek.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="w-full py-1.5 text-[9px] tracking-[0.22em] uppercase border border-[rgba(217,188,125,.4)] text-[#d9bc7d] hover:bg-[#d9bc7d] hover:text-black transition-all duration-300">Add to Cart</button>
         </div>
         <div class="dish-thumb"><img loading="lazy" src="images/sambousek.jpg" alt="Sambousek Diriyah"></div>
       </article>
@@ -523,10 +524,11 @@
           <p class="text-[0.65rem] tracking-[0.3em] uppercase text-white/40 mb-1.5">02 · Saleeg</p>
           <h4 class="serif italic text-xl mb-2"><span>Saleeg Royale</span> <span class="text-white/45 text-base not-italic">· 450g</span></h4>
           <p class="text-[12.5px] text-white/55 leading-relaxed mb-3">Hejazi creamed rice. Slow-poached chicken. Brown butter. Cardamom oil.</p>
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between mb-2.5">
             <span class="dish-spec">Hejazi · Slow-Poached</span>
             <span class="text-xs tracking-[0.2em] gold-text">128 SAR</span>
           </div>
+          <button onclick="NajdCart.add({id:'saleeg',name:'Saleeg Royale',price:128,img:'images/saleeg.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="w-full py-1.5 text-[9px] tracking-[0.22em] uppercase border border-[rgba(217,188,125,.4)] text-[#d9bc7d] hover:bg-[#d9bc7d] hover:text-black transition-all duration-300">Add to Cart</button>
         </div>
         <div class="dish-thumb"><img loading="lazy" src="images/saleeg.jpg" alt="Saleeg Royale"></div>
       </article>
@@ -535,10 +537,11 @@
           <p class="text-[0.65rem] tracking-[0.3em] uppercase text-white/40 mb-1.5">03 · Jareesh</p>
           <h4 class="serif italic text-xl mb-2"><span>Jareesh Najdi</span> <span class="text-white/45 text-base not-italic">· 400g</span></h4>
           <p class="text-[12.5px] text-white/55 leading-relaxed mb-3">Cracked wheat. Smoked lamb shoulder. Caramelized onion. Ghee.</p>
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between mb-2.5">
             <span class="dish-spec">Smoked · 6 hr</span>
             <span class="text-xs tracking-[0.2em] gold-text">115 SAR</span>
           </div>
+          <button onclick="NajdCart.add({id:'jareesh',name:'Jareesh Najdi',price:115,img:'images/jareesh.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="w-full py-1.5 text-[9px] tracking-[0.22em] uppercase border border-[rgba(217,188,125,.4)] text-[#d9bc7d] hover:bg-[#d9bc7d] hover:text-black transition-all duration-300">Add to Cart</button>
         </div>
         <div class="dish-thumb"><img loading="lazy" src="images/jareesh.jpg" alt="Jareesh Najdi"></div>
       </article>
@@ -550,10 +553,11 @@
           </div>
           <h4 class="serif italic text-xl mb-2"><span>Mandi Royale</span> <span class="text-white/45 text-base not-italic">· 700g</span></h4>
           <p class="text-[12.5px] text-white/55 leading-relaxed mb-3">12-hour underground roast. Saudi lamb shoulder. Saffron basmati. Charred tomato relish.</p>
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between mb-2.5">
             <span class="dish-spec">Chef's Selection · 12 hr</span>
             <span class="text-xs tracking-[0.2em] gold-text">185 SAR</span>
           </div>
+          <button onclick="NajdCart.add({id:'mandi',name:'Mandi Royale',price:185,img:'images/mandi.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="w-full py-1.5 text-[9px] tracking-[0.22em] uppercase border border-[rgba(217,188,125,.4)] text-[#d9bc7d] hover:bg-[#d9bc7d] hover:text-black transition-all duration-300">Add to Cart</button>
         </div>
         <div class="dish-thumb"><img loading="lazy" src="images/mandi.jpg" alt="Mandi Royale"></div>
       </article>
@@ -562,10 +566,11 @@
           <p class="text-[0.65rem] tracking-[0.3em] uppercase text-white/40 mb-1.5">05 · Mishwi</p>
           <h4 class="serif italic text-xl mb-2"><span>Mishwi Najdi</span> <span class="text-white/45 text-base not-italic">· Sharing</span></h4>
           <p class="text-[12.5px] text-white/55 leading-relaxed mb-3">Open-flame skewers. Kibdah. Kofta. Lamb chops. Date-tamarind glaze.</p>
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between mb-2.5">
             <span class="dish-spec">Open-Fire · Nightly</span>
             <span class="text-xs tracking-[0.2em] gold-text">155 SAR</span>
           </div>
+          <button onclick="NajdCart.add({id:'mishwi',name:'Mishwi Najdi',price:155,img:'images/mishwi.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="w-full py-1.5 text-[9px] tracking-[0.22em] uppercase border border-[rgba(217,188,125,.4)] text-[#d9bc7d] hover:bg-[#d9bc7d] hover:text-black transition-all duration-300">Add to Cart</button>
         </div>
         <div class="dish-thumb"><img loading="lazy" src="images/mishwi.jpg" alt="Mishwi Najdi"></div>
       </article>
@@ -577,10 +582,11 @@
           </div>
           <h4 class="serif italic text-xl mb-2"><span>Mutabbaq Royale</span> <span class="text-white/45 text-base not-italic">· 350g</span></h4>
           <p class="text-[12.5px] text-white/55 leading-relaxed mb-3">Hejazi layered pastry. Slow-cooked lamb. Leek confit. Smoked egg yolk.</p>
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between mb-2.5">
             <span class="dish-spec">Chef's Selection · Hand-Folded</span>
             <span class="text-xs tracking-[0.2em] gold-text">98 SAR</span>
           </div>
+          <button onclick="NajdCart.add({id:'mutabbaq',name:'Mutabbaq Royale',price:98,img:'images/mutabbaq.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="w-full py-1.5 text-[9px] tracking-[0.22em] uppercase border border-[rgba(217,188,125,.4)] text-[#d9bc7d] hover:bg-[#d9bc7d] hover:text-black transition-all duration-300">Add to Cart</button>
         </div>
         <div class="dish-thumb"><img loading="lazy" src="images/mutabbaq.jpg" alt="Mutabbaq Royale"></div>
       </article>
@@ -602,7 +608,8 @@
             <span class="serif italic text-xl gold-text">185 SAR</span>
             <span class="text-[0.65rem] tracking-[0.25em] uppercase text-white/45">700g</span>
           </div>
-          <a href="#reserve" class="offer-side-cta">Reserve Table</a>
+          <button onclick="NajdCart.add({id:'mandi',name:'Mandi Royale',price:185,img:'images/mandi.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="offer-side-cta mb-3">Add to Cart</button>
+          <button data-reserve class="offer-side-cta">Reserve Table</button>
         </div>
       </aside>
     </div>
