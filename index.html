@@ -82,7 +82,8 @@
   .reveal-delay-3{transition-delay:.36s;}
 
   /* word reveal for headings */
-  .word-reveal .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:0.2em;margin-bottom:-0.2em;}
+  .word-reveal .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:0.35em;margin-bottom:-0.35em;}
+  .word-reveal.in .w{overflow:visible;}
   .word-reveal .w > span{display:inline-block;transform:translateY(110%);transition:transform 1s cubic-bezier(.22,.61,.36,1);}
   .word-reveal.in .w > span{transform:none;}
   .word-reveal .w:nth-child(2) > span{transition-delay:.08s;}
@@ -246,6 +247,10 @@
   #chatSend:hover{opacity:.85;}
   #chatSend:disabled{opacity:.4;cursor:default;}
   #chatSend svg{width:16px;height:16px;fill:#000;}
+
+  /* signature dish & chef's selection add-to-cart button */
+  .sig-add-btn{display:block;width:100%;text-align:center;padding:.45rem;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#d9bc7d;border:1px solid rgba(217,188,125,.4);background:transparent;cursor:pointer;transition:background .25s,color .25s,border-color .25s;margin-top:.625rem;}
+  .sig-add-btn:hover,.sig-add-btn.added{background:#d9bc7d;color:#000;border-color:#d9bc7d;}
 </style>
 </head>
 <body class="overflow-x-hidden">
@@ -515,7 +520,7 @@
             <span class="dish-spec">Heritage</span>
             <span class="text-xs tracking-[0.2em] gold-text">62 SAR</span>
           </div>
-          <button onclick="NajdCart.add({id:'sambousek',name:'Sambousek Diriyah',price:62,img:'images/sambousek.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="w-full py-1.5 text-[9px] tracking-[0.22em] uppercase border border-[rgba(217,188,125,.4)] text-[#d9bc7d] hover:bg-[#d9bc7d] hover:text-black transition-all duration-300">Add to Cart</button>
+          <button onclick="NajdCart.add({id:'sambousek',name:'Sambousek Diriyah',price:62,img:'images/sambousek.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="sig-add-btn">Add to Cart</button>
         </div>
         <div class="dish-thumb"><img loading="lazy" src="images/sambousek.jpg" alt="Sambousek Diriyah"></div>
       </article>
@@ -528,7 +533,7 @@
             <span class="dish-spec">Hejazi · Slow-Poached</span>
             <span class="text-xs tracking-[0.2em] gold-text">128 SAR</span>
           </div>
-          <button onclick="NajdCart.add({id:'saleeg',name:'Saleeg Royale',price:128,img:'images/saleeg.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="w-full py-1.5 text-[9px] tracking-[0.22em] uppercase border border-[rgba(217,188,125,.4)] text-[#d9bc7d] hover:bg-[#d9bc7d] hover:text-black transition-all duration-300">Add to Cart</button>
+          <button onclick="NajdCart.add({id:'saleeg',name:'Saleeg Royale',price:128,img:'images/saleeg.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="sig-add-btn">Add to Cart</button>
         </div>
         <div class="dish-thumb"><img loading="lazy" src="images/saleeg.jpg" alt="Saleeg Royale"></div>
       </article>
@@ -541,7 +546,7 @@
             <span class="dish-spec">Smoked · 6 hr</span>
             <span class="text-xs tracking-[0.2em] gold-text">115 SAR</span>
           </div>
-          <button onclick="NajdCart.add({id:'jareesh',name:'Jareesh Najdi',price:115,img:'images/jareesh.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="w-full py-1.5 text-[9px] tracking-[0.22em] uppercase border border-[rgba(217,188,125,.4)] text-[#d9bc7d] hover:bg-[#d9bc7d] hover:text-black transition-all duration-300">Add to Cart</button>
+          <button onclick="NajdCart.add({id:'jareesh',name:'Jareesh Najdi',price:115,img:'images/jareesh.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="sig-add-btn">Add to Cart</button>
         </div>
         <div class="dish-thumb"><img loading="lazy" src="images/jareesh.jpg" alt="Jareesh Najdi"></div>
       </article>
@@ -557,7 +562,7 @@
             <span class="dish-spec">Chef's Selection · 12 hr</span>
             <span class="text-xs tracking-[0.2em] gold-text">185 SAR</span>
           </div>
-          <button onclick="NajdCart.add({id:'mandi',name:'Mandi Royale',price:185,img:'images/mandi.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="w-full py-1.5 text-[9px] tracking-[0.22em] uppercase border border-[rgba(217,188,125,.4)] text-[#d9bc7d] hover:bg-[#d9bc7d] hover:text-black transition-all duration-300">Add to Cart</button>
+          <button onclick="NajdCart.add({id:'mandi',name:'Mandi Royale',price:185,img:'images/mandi.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="sig-add-btn">Add to Cart</button>
         </div>
         <div class="dish-thumb"><img loading="lazy" src="images/mandi.jpg" alt="Mandi Royale"></div>
       </article>
@@ -570,7 +575,7 @@
             <span class="dish-spec">Open-Fire · Nightly</span>
             <span class="text-xs tracking-[0.2em] gold-text">155 SAR</span>
           </div>
-          <button onclick="NajdCart.add({id:'mishwi',name:'Mishwi Najdi',price:155,img:'images/mishwi.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="w-full py-1.5 text-[9px] tracking-[0.22em] uppercase border border-[rgba(217,188,125,.4)] text-[#d9bc7d] hover:bg-[#d9bc7d] hover:text-black transition-all duration-300">Add to Cart</button>
+          <button onclick="NajdCart.add({id:'mishwi',name:'Mishwi Najdi',price:155,img:'images/mishwi.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="sig-add-btn">Add to Cart</button>
         </div>
         <div class="dish-thumb"><img loading="lazy" src="images/mishwi.jpg" alt="Mishwi Najdi"></div>
       </article>
@@ -586,7 +591,7 @@
             <span class="dish-spec">Chef's Selection · Hand-Folded</span>
             <span class="text-xs tracking-[0.2em] gold-text">98 SAR</span>
           </div>
-          <button onclick="NajdCart.add({id:'mutabbaq',name:'Mutabbaq Royale',price:98,img:'images/mutabbaq.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="w-full py-1.5 text-[9px] tracking-[0.22em] uppercase border border-[rgba(217,188,125,.4)] text-[#d9bc7d] hover:bg-[#d9bc7d] hover:text-black transition-all duration-300">Add to Cart</button>
+          <button onclick="NajdCart.add({id:'mutabbaq',name:'Mutabbaq Royale',price:98,img:'images/mutabbaq.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="sig-add-btn">Add to Cart</button>
         </div>
         <div class="dish-thumb"><img loading="lazy" src="images/mutabbaq.jpg" alt="Mutabbaq Royale"></div>
       </article>
@@ -608,7 +613,7 @@
             <span class="serif italic text-xl gold-text">185 SAR</span>
             <span class="text-[0.65rem] tracking-[0.25em] uppercase text-white/45">700g</span>
           </div>
-          <button onclick="NajdCart.add({id:'mandi',name:'Mandi Royale',price:185,img:'images/mandi.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="offer-side-cta mb-3">Add to Cart</button>
+          <button onclick="NajdCart.add({id:'mandi',name:'Mandi Royale',price:185,img:'images/mandi.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="offer-side-cta" style="margin-bottom:.75rem;">Add to Cart</button>
           <button data-reserve class="offer-side-cta">Reserve Table</button>
         </div>
       </aside>
