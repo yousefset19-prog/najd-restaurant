@@ -50,17 +50,17 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=El+Messiri:wght@400;500;600;700&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <style>
   :root{
     --gold: linear-gradient(270deg,#fbe291 55%,#c8982b 100%);
   }
-  html,body{background:#000;color:#fff;font-family:'Inter','El Messiri',sans-serif;}
-  .serif{font-family:'Cormorant Garamond','Reem Kufi',serif;}
-  html[lang="ar"] body{font-family:'El Messiri',sans-serif;font-weight:500;}
-  html[lang="ar"] .serif{font-family:'Reem Kufi',sans-serif;font-weight:500;font-style:normal;}
+  html,body{background:#000;color:#fff;font-family:'Inter','Amiri',sans-serif;}
+  .serif{font-family:'Cormorant Garamond','Amiri',serif;}
+  html[lang="ar"] body{font-family:'Amiri',serif;font-weight:400;font-size:1.05em;}
+  html[lang="ar"] .serif{font-family:'Amiri',serif;font-weight:700;font-style:normal;}
   /* always use Arabic-aware font for any Arabic glyph (e.g. lang toggle label) */
-  #langToggle{font-family:'El Messiri','Inter',sans-serif;}
+  #langToggle{font-family:'Amiri','Inter',sans-serif;}
   /* flip directional arrow icons in RTL */
   html[lang="ar"] .arrow{display:inline-block;transform:scaleX(-1);}
   html[lang="ar"] .italic{font-style:normal;}
@@ -124,15 +124,17 @@
   /* signature dish list rows (Nusret-style) */
   .dish-row{display:grid;grid-template-columns:1fr 96px;gap:1.25rem;align-items:center;padding:1.1rem 1.25rem;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:2px;transition:border-color .5s ease, background .5s ease;}
   .dish-row.no-img{grid-template-columns:1fr;}
-  .dish-row:hover{border-color:rgba(217,188,125,.35);background:rgba(255,255,255,.04);}
   .dish-thumb{position:relative;width:96px;height:96px;overflow:hidden;border-radius:2px;}
-  .dish-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.22,.61,.36,1);}
-  .dish-row:hover .dish-thumb img{transform:scale(1.06);}
+  .dish-row:hover{border-color:rgba(217,188,125,.35);background:rgba(255,255,255,.04);position:relative;z-index:10;}
+  .dish-thumb img{width:100%;height:100%;object-fit:cover;border-radius:2px;transition:transform .45s cubic-bezier(.22,.61,.36,1),box-shadow .45s;}
+  .dish-thumb:hover{overflow:visible;}
+  .dish-thumb:hover img{transform:scale(3.4);box-shadow:0 24px 70px rgba(0,0,0,.95);}
   .dish-row h4{position:relative;display:inline-block;}
   .dish-row h4::after{content:"";position:absolute;left:0;bottom:-3px;width:0;height:1px;background:linear-gradient(90deg,#fbe291,#c8982b);transition:width .6s cubic-bezier(.22,.61,.36,1);}
   .dish-row:hover h4::after{width:100%;}
-  .dish-spec{display:inline-flex;align-items:center;gap:.4rem;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(217,188,125,.85);}
+  .dish-spec{display:inline-flex;align-items:center;gap:.4rem;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(217,188,125,.85);}
   .dish-spec::before{content:"";width:4px;height:4px;border-radius:50%;background:#d9bc7d;}
+  .dish-row .dish-price{font-size:13px;}
   .gold-coin{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#fbe291,#c8982b);color:#000;font-size:9px;font-weight:700;font-family:serif;line-height:1;flex-shrink:0;}
 
   /* parallax hero image */
@@ -214,12 +216,12 @@
   /* cart drawer */
   #cartDrawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:#0a0a0a;border-left:1px solid rgba(217,188,125,.2);z-index:80;transform:translateX(100%);transition:transform .4s cubic-bezier(.22,.61,.36,1),visibility 0s linear .4s;display:flex;flex-direction:column;visibility:hidden;}
   html[lang="ar"] #cartDrawer{right:auto;left:0;border-left:none;border-right:1px solid rgba(217,188,125,.2);transform:translateX(-100%);}
-  #cartDrawer.open{transform:none;visibility:visible;transition:transform .4s cubic-bezier(.22,.61,.36,1),visibility 0s;}
+  #cartDrawer.open,html[lang="ar"] #cartDrawer.open{transform:none;visibility:visible;transition:transform .4s cubic-bezier(.22,.61,.36,1),visibility 0s;}
   #cartBackdrop{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:75;opacity:0;pointer-events:none;transition:opacity .35s;}
   #cartBackdrop.open{opacity:1;pointer-events:auto;}
 
   /* chat widget */
-  #chatBubble{position:fixed;bottom:1.5rem;right:1.5rem;z-index:80;width:56px;height:56px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 24px rgba(200,152,43,.4);transition:transform .2s,box-shadow .2s;}
+  #chatBubble{position:fixed;bottom:3.5rem;right:1.5rem;z-index:80;width:56px;height:56px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 24px rgba(200,152,43,.4);transition:transform .2s,box-shadow .2s;}
   #chatBubble:hover{transform:scale(1.08);box-shadow:0 6px 32px rgba(200,152,43,.55);}
   #chatBubble svg{width:24px;height:24px;fill:#000;}
   #chatPanel{position:fixed;bottom:5rem;right:1.5rem;z-index:80;width:min(360px,calc(100vw - 3rem));height:min(500px,calc(100vh - 8rem));background:#0a0a0a;border:1px solid rgba(200,152,43,.25);border-radius:16px;display:flex;flex-direction:column;overflow:hidden;transform:scale(.92) translateY(12px);opacity:0;pointer-events:none;transition:transform .25s cubic-bezier(.22,.61,.36,1),opacity .25s;}
@@ -251,6 +253,10 @@
   /* signature dish & chef's selection add-to-cart button */
   .sig-add-btn{display:block;width:100%;text-align:center;padding:.45rem;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#d9bc7d;border:1px solid rgba(217,188,125,.4);background:transparent;cursor:pointer;transition:background .25s,color .25s,border-color .25s;margin-top:.625rem;}
   .sig-add-btn:hover,.sig-add-btn.added{background:#d9bc7d;color:#000;border-color:#d9bc7d;}
+  .allergen{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,190,60,.45);margin-top:.3rem;margin-bottom:.5rem;}
+  .offer-badge{display:inline-flex;align-items:center;padding:.15rem .45rem;font-size:8px;letter-spacing:.18em;text-transform:uppercase;background:#d9bc7d;color:#000;font-weight:700;vertical-align:middle;margin-left:.5rem;}
+  .dish-row.has-offer{border-color:rgba(217,188,125,.3);box-shadow:0 0 0 1px rgba(217,188,125,.1);}
+  .price-was{font-size:10px;text-decoration:line-through;color:rgba(255,255,255,.3);margin-right:.35rem;}
 </style>
 </head>
 <body class="overflow-x-hidden">
@@ -299,9 +305,8 @@
   <nav class="h-full flex flex-col items-center justify-center gap-6 serif italic text-4xl md:text-6xl">
     <a href="#home" class="nav-link hover:gold-text transition">Home</a>
     <a href="#offers" class="nav-link hover:gold-text transition">Offers</a>
-    <a href="#signature" class="nav-link hover:gold-text transition">Dishes</a>
+    <a href="menu.html" class="nav-link hover:gold-text transition">Dishes</a>
     <a href="#reviews" class="nav-link hover:gold-text transition">Reviews</a>
-    <a href="#gallery" class="nav-link hover:gold-text transition">Gallery</a>
     <a href="#contact" class="nav-link hover:gold-text transition">Contact</a>
   </nav>
 </div>
@@ -316,8 +321,14 @@
       <input required name="name" placeholder="Full name" data-ph-ar="الاسم الكامل" class="col-span-2 bg-transparent border-b border-white/20 focus:border-[#c8982b] outline-none py-2 placeholder:text-white/40 transition">
       <input required type="email" name="email" placeholder="Email" data-ph-ar="البريد الإلكتروني" class="col-span-2 md:col-span-1 bg-transparent border-b border-white/20 focus:border-[#c8982b] outline-none py-2 placeholder:text-white/40 transition">
       <input required type="tel" name="phone" placeholder="Phone" data-ph-ar="رقم الجوال" class="col-span-2 md:col-span-1 bg-transparent border-b border-white/20 focus:border-[#c8982b] outline-none py-2 placeholder:text-white/40 transition">
-      <input required type="date" name="date" class="col-span-1 bg-transparent border-b border-white/20 focus:border-[#c8982b] outline-none py-2 text-white/90 [color-scheme:dark] transition">
-      <input required type="time" name="time" class="col-span-1 bg-transparent border-b border-white/20 focus:border-[#c8982b] outline-none py-2 text-white/90 [color-scheme:dark] transition">
+      <div class="col-span-2 flex items-center justify-between border-b border-white/20 py-2 cursor-pointer" onclick="document.getElementById('resDate').showPicker()">
+        <label for="resDate" class="text-[10px] tracking-[0.18em] uppercase text-white/50 flex-shrink-0 cursor-pointer">Reservation Date</label>
+        <input required type="date" id="resDate" name="date" class="bg-transparent outline-none text-white/90 [color-scheme:dark] text-xs cursor-pointer">
+      </div>
+      <div class="col-span-2 flex items-center justify-between border-b border-white/20 py-2 cursor-pointer" onclick="document.getElementById('resTime').showPicker()">
+        <label for="resTime" class="text-[10px] tracking-[0.18em] uppercase text-white/50 flex-shrink-0 cursor-pointer">Reservation Time</label>
+        <input required type="time" id="resTime" name="time" class="bg-transparent outline-none text-white/90 [color-scheme:dark] text-xs cursor-pointer">
+      </div>
       <select required name="guests" class="col-span-2 bg-transparent border-b border-white/20 focus:border-[#c8982b] outline-none py-2 text-white/90 transition">
         <option value="" class="bg-black">Number of guests</option>
         <option class="bg-black">1 guest</option><option class="bg-black">2 guests</option><option class="bg-black">3 guests</option><option class="bg-black">4 guests</option><option class="bg-black">5 guests</option><option class="bg-black">6 guests</option><option class="bg-black">7+ guests</option>
@@ -337,13 +348,13 @@
   <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black"></div>
   <div class="absolute inset-0" style="background:linear-gradient(to right,#000 40%,transparent 70%)"></div>
   <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-    <p class="serif italic text-2xl md:text-4xl mb-4 gold-text reveal">Modern Najd Heritage</p>
-    <h1 class="serif italic text-6xl md:text-8xl leading-none mb-12 word-reveal">
+    <p class="serif italic text-[1.98rem] md:text-[2.97rem] mb-4 gold-text reveal tracking-[0.15em]">Modern Najd Heritage</p>
+    <h1 class="serif italic text-[4.95rem] md:text-[7.92rem] leading-none mb-12 word-reveal">
       <span class="w notranslate" translate="no"><span>Najd</span></span>
     </h1>
     <div class="flex gap-4 reveal reveal-delay-2">
-      <button data-reserve class="btn-gold px-6 py-3 rounded-full text-xs tracking-[0.2em] uppercase flex items-center gap-2">Book Now <span class="arrow">↗</span></button>
-      <a href="menu.html" class="px-6 py-3 rounded-full border border-white/40 text-xs tracking-[0.2em] uppercase hover:bg-white hover:text-black transition">View Menu</a>
+      <button data-reserve class="btn-gold px-8 py-4 rounded-full text-sm tracking-[0.2em] uppercase flex items-center gap-2">Book Now <span class="arrow">↗</span></button>
+      <a href="menu.html" class="px-8 py-4 rounded-full border border-white/40 text-sm tracking-[0.2em] uppercase hover:bg-white hover:text-black transition">View Menu</a>
     </div>
   </div>
 </section>
@@ -385,14 +396,14 @@
           <p class="text-[0.55rem] tracking-[0.3em] uppercase text-white/40">Riyadh · 2026</p>
         </div>
         <div class="book-stack">
-          <article class="book-page" data-target="mezze">
+          <article class="book-page" data-target="starters">
             <div class="book-page-face">
               <div class="flex justify-between items-start">
                 <span class="book-page-num">01 / 06</span>
-                <span class="book-page-num gold-text">Mezze</span>
+                <span class="book-page-num gold-text">Starters</span>
               </div>
               <div class="text-center px-2">
-                <h4 class="book-page-cat mb-4">Mezze</h4>
+                <h4 class="book-page-cat mb-4">Starters</h4>
                 <ul>
                   <li><span>Sambousek Diriyah</span><span class="px">48</span></li>
                   <li><span>Mutabbaq Royale</span><span class="px">55</span></li>
@@ -501,6 +512,7 @@
 </section>
 
 
+<div id="offers" class="scroll-mt-24"></div>
 <section id="signature" class="px-6 md:px-16 py-20">
   <div class="max-w-6xl mx-auto">
     <h2 class="serif text-4xl md:text-5xl italic mb-4 max-w-xl leading-tight reveal">
@@ -513,12 +525,13 @@
       <div class="grid sm:grid-cols-2 gap-4 md:gap-5">
       <article class="dish-row reveal">
         <div class="min-w-0">
-          <p class="text-[0.65rem] tracking-[0.3em] uppercase text-white/40 mb-1.5">01 · Mezze</p>
-          <h4 class="serif italic text-xl mb-2"><span>Sambousek Diriyah</span> <span class="text-white/45 text-base not-italic">· 6 pcs</span></h4>
-          <p class="text-[12.5px] text-white/55 leading-relaxed mb-3">Hand-folded pastry. Spiced lamb. Pomegranate molasses. Smoked yogurt.</p>
+          <p class="text-[0.65rem] tracking-[0.3em] uppercase text-white/40 mb-1.5">01 · Starters</p>
+          <h4 class="serif italic text-[1.375rem] mb-2"><span>Sambousek Diriyah</span> <span class="text-white/45 text-[1.1rem] not-italic">· 6 pcs</span></h4>
+          <p class="text-[16px] text-white/55 leading-relaxed mb-1">Hand-folded pastry. Spiced lamb. Pomegranate molasses. Smoked yogurt.</p>
+          <p class="allergen">⚠ Contains: Gluten · Dairy</p>
           <div class="flex items-center justify-between mb-2.5">
             <span class="dish-spec">Heritage</span>
-            <span class="text-xs tracking-[0.2em] gold-text">62 SAR</span>
+            <span class="dish-price text-xs tracking-[0.2em] gold-text">62 SAR</span>
           </div>
           <button onclick="NajdCart.add({id:'sambousek',name:'Sambousek Diriyah',price:62,img:'images/sambousek.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="sig-add-btn">Add to Cart</button>
         </div>
@@ -527,11 +540,12 @@
       <article class="dish-row reveal reveal-delay-1">
         <div class="min-w-0">
           <p class="text-[0.65rem] tracking-[0.3em] uppercase text-white/40 mb-1.5">02 · Saleeg</p>
-          <h4 class="serif italic text-xl mb-2"><span>Saleeg Royale</span> <span class="text-white/45 text-base not-italic">· 450g</span></h4>
-          <p class="text-[12.5px] text-white/55 leading-relaxed mb-3">Hejazi creamed rice. Slow-poached chicken. Brown butter. Cardamom oil.</p>
+          <h4 class="serif italic text-[1.375rem] mb-2"><span>Saleeg Royale</span> <span class="text-white/45 text-[1.1rem] not-italic">· 450g</span></h4>
+          <p class="text-[16px] text-white/55 leading-relaxed mb-1">Hejazi creamed rice. Slow-poached chicken. Brown butter. Cardamom oil.</p>
+          <p class="allergen">⚠ Contains: Dairy</p>
           <div class="flex items-center justify-between mb-2.5">
             <span class="dish-spec">Hejazi · Slow-Poached</span>
-            <span class="text-xs tracking-[0.2em] gold-text">128 SAR</span>
+            <span class="dish-price text-xs tracking-[0.2em] gold-text">128 SAR</span>
           </div>
           <button onclick="NajdCart.add({id:'saleeg',name:'Saleeg Royale',price:128,img:'images/saleeg.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="sig-add-btn">Add to Cart</button>
         </div>
@@ -540,11 +554,12 @@
       <article class="dish-row reveal">
         <div class="min-w-0">
           <p class="text-[0.65rem] tracking-[0.3em] uppercase text-white/40 mb-1.5">03 · Jareesh</p>
-          <h4 class="serif italic text-xl mb-2"><span>Jareesh Najdi</span> <span class="text-white/45 text-base not-italic">· 400g</span></h4>
-          <p class="text-[12.5px] text-white/55 leading-relaxed mb-3">Cracked wheat. Smoked lamb shoulder. Caramelized onion. Ghee.</p>
+          <h4 class="serif italic text-[1.375rem] mb-2"><span>Jareesh Najdi</span> <span class="text-white/45 text-[1.1rem] not-italic">· 400g</span></h4>
+          <p class="text-[16px] text-white/55 leading-relaxed mb-1">Cracked wheat. Smoked lamb shoulder. Caramelized onion. Ghee.</p>
+          <p class="allergen">⚠ Contains: Gluten · Dairy</p>
           <div class="flex items-center justify-between mb-2.5">
             <span class="dish-spec">Smoked · 6 hr</span>
-            <span class="text-xs tracking-[0.2em] gold-text">115 SAR</span>
+            <span class="dish-price text-xs tracking-[0.2em] gold-text">115 SAR</span>
           </div>
           <button onclick="NajdCart.add({id:'jareesh',name:'Jareesh Najdi',price:115,img:'images/jareesh.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="sig-add-btn">Add to Cart</button>
         </div>
@@ -556,26 +571,26 @@
             <p class="text-[0.65rem] tracking-[0.3em] uppercase text-white/40">04 · Mandi</p>
             <span class="gold-coin">★</span>
           </div>
-          <h4 class="serif italic text-xl mb-2"><span>Mandi Royale</span> <span class="text-white/45 text-base not-italic">· 700g</span></h4>
-          <p class="text-[12.5px] text-white/55 leading-relaxed mb-3">12-hour underground roast. Saudi lamb shoulder. Saffron basmati. Charred tomato relish.</p>
+          <h4 class="serif italic text-[1.375rem] mb-2"><span>Mandi Royale</span> <span class="text-white/45 text-[1.1rem] not-italic">· 700g</span></h4>
+          <p class="text-[16px] text-white/55 leading-relaxed mb-3">12-hour underground roast. Saudi lamb shoulder. Saffron basmati. Charred tomato relish.</p>
           <div class="flex items-center justify-between mb-2.5">
             <span class="dish-spec">Chef's Selection · 12 hr</span>
-            <span class="text-xs tracking-[0.2em] gold-text">185 SAR</span>
+            <span class="dish-price text-xs tracking-[0.2em] gold-text">185 SAR</span>
           </div>
           <button onclick="NajdCart.add({id:'mandi',name:'Mandi Royale',price:185,img:'images/mandi.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="sig-add-btn">Add to Cart</button>
         </div>
         <div class="dish-thumb"><img loading="lazy" src="images/mandi.jpg" alt="Mandi Royale"></div>
       </article>
-      <article class="dish-row reveal">
+      <article class="dish-row has-offer reveal">
         <div class="min-w-0">
-          <p class="text-[0.65rem] tracking-[0.3em] uppercase text-white/40 mb-1.5">05 · Mishwi</p>
-          <h4 class="serif italic text-xl mb-2"><span>Mishwi Najdi</span> <span class="text-white/45 text-base not-italic">· Sharing</span></h4>
-          <p class="text-[12.5px] text-white/55 leading-relaxed mb-3">Open-flame skewers. Kibdah. Kofta. Lamb chops. Date-tamarind glaze.</p>
+          <p class="text-[0.65rem] tracking-[0.3em] uppercase text-white/40 mb-1.5">05 · Mishwi <span class="offer-badge">20% Off</span></p>
+          <h4 class="serif italic text-[1.375rem] mb-2"><span>Mishwi Najdi</span> <span class="text-white/45 text-[1.1rem] not-italic">· Sharing</span></h4>
+          <p class="text-[16px] text-white/55 leading-relaxed mb-3">Open-flame skewers. Kibdah. Kofta. Lamb chops. Date-tamarind glaze.</p>
           <div class="flex items-center justify-between mb-2.5">
             <span class="dish-spec">Open-Fire · Nightly</span>
-            <span class="text-xs tracking-[0.2em] gold-text">155 SAR</span>
+            <span class="text-xs tracking-[0.2em]"><span class="price-was">155 SAR</span><span class="gold-text">124 SAR</span></span>
           </div>
-          <button onclick="NajdCart.add({id:'mishwi',name:'Mishwi Najdi',price:155,img:'images/mishwi.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="sig-add-btn">Add to Cart</button>
+          <button onclick="NajdCart.add({id:'mishwi',name:'Mishwi Najdi',price:124,img:'images/mishwi.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="sig-add-btn">Add to Cart</button>
         </div>
         <div class="dish-thumb"><img loading="lazy" src="images/mishwi.jpg" alt="Mishwi Najdi"></div>
       </article>
@@ -585,11 +600,12 @@
             <p class="text-[0.65rem] tracking-[0.3em] uppercase text-white/40">06 · Hejazi</p>
             <span class="gold-coin">★</span>
           </div>
-          <h4 class="serif italic text-xl mb-2"><span>Mutabbaq Royale</span> <span class="text-white/45 text-base not-italic">· 350g</span></h4>
-          <p class="text-[12.5px] text-white/55 leading-relaxed mb-3">Hejazi layered pastry. Slow-cooked lamb. Leek confit. Smoked egg yolk.</p>
+          <h4 class="serif italic text-[1.375rem] mb-2"><span>Mutabbaq Royale</span> <span class="text-white/45 text-[1.1rem] not-italic">· 350g</span></h4>
+          <p class="text-[16px] text-white/55 leading-relaxed mb-1">Hejazi layered pastry. Slow-cooked lamb. Leek confit. Smoked egg yolk.</p>
+          <p class="allergen">⚠ Contains: Gluten · Eggs</p>
           <div class="flex items-center justify-between mb-2.5">
             <span class="dish-spec">Chef's Selection · Hand-Folded</span>
-            <span class="text-xs tracking-[0.2em] gold-text">98 SAR</span>
+            <span class="dish-price text-xs tracking-[0.2em] gold-text">98 SAR</span>
           </div>
           <button onclick="NajdCart.add({id:'mutabbaq',name:'Mutabbaq Royale',price:98,img:'images/mutabbaq.jpg'}); this.textContent='Added ✓'; setTimeout(()=>{this.textContent='Add to Cart'},1500);" class="sig-add-btn">Add to Cart</button>
         </div>
@@ -791,7 +807,7 @@
     "Modern Najdi Heritage": "تراث نجدي عصري",
     "Riyadh · 2026": "الرياض · ٢٠٢٦",
     "Open Section →": "افتح القسم ←",
-    "Mezze": "مقبلات",
+    "Starters": "مقبلات",
     "Soups": "شوربات",
     "Mains": "أطباق رئيسية",
     "Grills": "مشويات",
@@ -819,7 +835,7 @@
     "Jallab · Date Syrup": "جلاب · دبس التمر",
     "Rose & Lemon": "ورد وليمون",
     "Six dishes that define the Najd table — from open-fire mezze to slow-roasted lamb.": "ستة أطباق تُعرّف طاولة نجد — من مقبلات النار إلى اللحم المشوي ببطء.",
-    "01 · Mezze": "٠١ · مقبلات",
+    "01 · Starters": "٠١ · مقبلات",
     "02 · Saleeg": "٠٢ · صليق",
     "03 · Jareesh": "٠٣ · جريش",
     "04 · Mandi": "٠٤ · مندي",
@@ -1139,6 +1155,26 @@
     this.style.height = Math.min(this.scrollHeight, 80) + 'px';
   });
 })();
+</script>
+<script>
+(function(){
+  var drawer = document.getElementById('cartDrawer');
+  var bubble = document.getElementById('chatBubble');
+  if (!drawer || !bubble) return;
+  new MutationObserver(function(){
+    bubble.style.display = drawer.classList.contains('open') ? 'none' : '';
+  }).observe(drawer, { attributes: true, attributeFilter: ['class'] });
+})();
+
+document.querySelectorAll('a[href="#contact"]').forEach(function(link){
+  link.addEventListener('click', function(e){
+    e.preventDefault();
+    var el = document.getElementById('contact');
+    var rect = el.getBoundingClientRect();
+    var center = window.scrollY + rect.top - (window.innerHeight / 2) + (rect.height / 2);
+    window.scrollTo({ top: Math.max(0, center), behavior: 'smooth' });
+  });
+});
 </script>
 </body>
 </html>

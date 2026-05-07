@@ -42,9 +42,11 @@
   .dotted{background-image:radial-gradient(circle,rgba(255,255,255,.18) 1px,transparent 1px);background-size:6px 1px;background-repeat:repeat-x;background-position:0 50%;}
   .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1);}
   .reveal.in{opacity:1;transform:none;}
-  .zoom-frame{overflow:hidden;}
-  .zoom-frame img{transition:transform 1.1s cubic-bezier(.22,.61,.36,1);}
-  .zoom-frame:hover img{transform:scale(1.06);}
+  .zoom-frame{overflow:hidden;border-radius:2px;}
+  .zoom-frame img{border-radius:2px;transition:transform .45s cubic-bezier(.22,.61,.36,1),box-shadow .45s;}
+  article:hover{position:relative;z-index:10;}
+  .zoom-frame:hover{overflow:visible;}
+  .zoom-frame:hover img{transform:scale(3.4);box-shadow:0 24px 70px rgba(0,0,0,.95);}
   .cat-link.active{color:#fbe291;}
   #langToggle{font-family:'IBM Plex Sans Arabic','Inter',sans-serif;}
   html[lang="ar"] .arrow{display:inline-block;transform:scaleX(-1);}
@@ -55,6 +57,7 @@
   .add-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .85rem;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:#d9bc7d;border:1px solid rgba(217,188,125,.4);transition:background .25s,color .25s,border-color .25s;cursor:pointer;background:transparent;}
   .add-btn:hover{background:#d9bc7d;color:#000;border-color:#d9bc7d;}
   .add-btn.added{background:#d9bc7d;color:#000;border-color:#d9bc7d;}
+  .allergen{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,190,60,.45);margin-top:.3rem;}
   #cartDrawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:#0a0a0a;border-left:1px solid rgba(217,188,125,.2);z-index:80;transform:translateX(100%);transition:transform .4s cubic-bezier(.22,.61,.36,1),visibility 0s linear .4s;display:flex;flex-direction:column;visibility:hidden;}
   html[lang="ar"] #cartDrawer{right:auto;left:0;border-left:none;border-right:1px solid rgba(217,188,125,.2);transform:translateX(-100%);}
   #cartDrawer.open{transform:none;visibility:visible;transition:transform .4s cubic-bezier(.22,.61,.36,1),visibility 0s;}
@@ -135,7 +138,8 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">48</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Hand-folded pastries, spiced lamb, pomegranate molasses, smoked yogurt.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Hand-folded pastries, spiced lamb, pomegranate molasses, smoked yogurt.</p>
+        <p class="allergen">⚠ Contains: Gluten · Dairy</p>
       </div>
     </article>
 
@@ -147,7 +151,8 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">55</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Hejazi layered pastry, slow-cooked lamb, leek, smoked egg yolk.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Hejazi layered pastry, slow-cooked lamb, leek, smoked egg yolk.</p>
+        <p class="allergen">⚠ Contains: Gluten · Eggs</p>
       </div>
     </article>
 
@@ -159,7 +164,8 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">42</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Cracked wheat cakes, ghee, caramelized onion, smoked labneh.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Cracked wheat cakes, ghee, caramelized onion, smoked labneh.</p>
+        <p class="allergen">⚠ Contains: Gluten · Dairy</p>
       </div>
     </article>
 
@@ -171,7 +177,7 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">35</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Ajwa, Safawi & Medjool dates, ghee, Arabic coffee.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Ajwa, Safawi & Medjool dates, ghee, Arabic coffee.</p>
       </div>
     </article>
 
@@ -190,7 +196,8 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">38</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Smoked green wheat, slow-braised lamb, cumin, dried lime.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Smoked green wheat, slow-braised lamb, cumin, dried lime.</p>
+        <p class="allergen">⚠ Contains: Gluten</p>
       </div>
     </article>
 
@@ -202,7 +209,7 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">45</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Traditional Najdi lamb broth, cardamom, black pepper, herbs.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Traditional Najdi lamb broth, cardamom, black pepper, herbs.</p>
       </div>
     </article>
 
@@ -221,7 +228,7 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">145</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Twelve-hour underground-roasted lamb, saffron basmati, charred tomato relish.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Twelve-hour underground-roasted lamb, saffron basmati, charred tomato relish.</p>
       </div>
     </article>
 
@@ -233,7 +240,8 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">95</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Hejazi creamed rice, slow-poached chicken, brown butter, cardamom oil.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Hejazi creamed rice, slow-poached chicken, brown butter, cardamom oil.</p>
+        <p class="allergen">⚠ Contains: Dairy</p>
       </div>
     </article>
 
@@ -245,7 +253,8 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">78</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Cracked wheat, smoked lamb shoulder, caramelized onion, ghee.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Cracked wheat, smoked lamb shoulder, caramelized onion, ghee.</p>
+        <p class="allergen">⚠ Contains: Gluten · Dairy</p>
       </div>
     </article>
 
@@ -257,7 +266,8 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">72</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Slow-cooked wheat and lamb, cinnamon ghee, rose water.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Slow-cooked wheat and lamb, cinnamon ghee, rose water.</p>
+        <p class="allergen">⚠ Contains: Gluten · Dairy</p>
       </div>
     </article>
 
@@ -276,7 +286,7 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">110</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Open-flame skewers — kibdah, kofta, lamb chops — date-tamarind glaze.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Open-flame skewers — kibdah, kofta, lamb chops — date-tamarind glaze.</p>
       </div>
     </article>
 
@@ -288,7 +298,7 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">135</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Charcoal lamb ribs, saffron marinade, slow-fire finish.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Charcoal lamb ribs, saffron marinade, slow-fire finish.</p>
       </div>
     </article>
 
@@ -300,7 +310,7 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">65</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Grilled liver, cumin, lemon, green chilli.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Grilled liver, cumin, lemon, green chilli.</p>
       </div>
     </article>
 
@@ -312,7 +322,7 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">75</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Spiced ground lamb skewers, parsley, caramelized onion.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Spiced ground lamb skewers, parsley, caramelized onion.</p>
       </div>
     </article>
 
@@ -331,7 +341,8 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">35</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Crisp dough bites, date syrup, sesame, saffron honey.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Crisp dough bites, date syrup, sesame, saffron honey.</p>
+        <p class="allergen">⚠ Contains: Gluten · Sesame</p>
       </div>
     </article>
 
@@ -343,7 +354,8 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">38</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Wheat porridge, brown butter, wild honey, cardamom.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Wheat porridge, brown butter, wild honey, cardamom.</p>
+        <p class="allergen">⚠ Contains: Gluten · Dairy</p>
       </div>
     </article>
 
@@ -355,7 +367,8 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">42</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Date ice cream, salted caramel, crushed pistachios.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Date ice cream, salted caramel, crushed pistachios.</p>
+        <p class="allergen">⚠ Contains: Dairy · Tree Nuts</p>
       </div>
     </article>
 
@@ -374,7 +387,7 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">18</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Traditional Arabic coffee, cardamom, saffron, served from dallah.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Traditional Arabic coffee, cardamom, saffron, served from dallah.</p>
       </div>
     </article>
 
@@ -386,7 +399,7 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">18</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Black tea infused with fresh sage leaves.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Black tea infused with fresh sage leaves.</p>
       </div>
     </article>
 
@@ -398,7 +411,7 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">22</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Saffron-infused tea, cardamom, rose petals.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Saffron-infused tea, cardamom, rose petals.</p>
       </div>
     </article>
 
@@ -410,7 +423,7 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">20</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Chilled tamarind juice, mint, lime.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Chilled tamarind juice, mint, lime.</p>
       </div>
     </article>
 
@@ -422,7 +435,8 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">15</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Traditional Saudi buttermilk, lightly salted, served chilled.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Traditional Saudi buttermilk, lightly salted, served chilled.</p>
+        <p class="allergen">⚠ Contains: Dairy</p>
       </div>
     </article>
 
@@ -434,7 +448,7 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">18</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Imported sparkling mineral water.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Imported sparkling mineral water.</p>
       </div>
     </article>
 
@@ -446,7 +460,7 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">15</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Local still mineral water.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Local still mineral water.</p>
       </div>
     </article>
 
@@ -458,7 +472,7 @@
           <span class="flex-1 dotted"></span>
           <span class="gold-text text-sm">10</span>
         </div>
-        <p class="text-xs text-white/60 leading-relaxed">Selection of chilled sodas.</p>
+        <p class="text-[14px] text-white/60 leading-relaxed">Selection of chilled sodas.</p>
       </div>
     </article>
 
